@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=900, initial-scale=1">
+    <title>Sudoku Note</title>
+    <script type="text/javascript" src="elm.js"></script>
+</head>
+<body>
+<div id="elm"></div>
+
+<script type="text/javascript">
+    const storedState = localStorage.getItem('sudoku');
+    const startingState = storedState ? storedState : "";
+
+    const elmApp =
+        Elm.Main.init({
+            node: document.getElementById('elm'),
+            flags: startingState
+        });
+
+    elmApp.ports.setStorage.subscribe(function (state) {
+        localStorage.setItem('sudoku', JSON.stringify(state));
+    });
+
+</script>
+
+</body>
+</html>
